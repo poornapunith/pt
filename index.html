@@ -1,80 +1,111 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>POORNA TECH</title>
 
 <style>
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: "Segoe UI", sans-serif;
   background: linear-gradient(135deg, #f5e6d8, #e8c3a3);
   color: #4a2c1a;
 }
 
+/* HEADER */
 .header {
   text-align: center;
   padding: 40px 20px 20px;
 }
 
 .logo {
-  width: 120px;
+  width: 100px;
+  border-radius: 12px;
 }
 
 .title {
-  font-size: 32px;
-  font-weight: bold;
+  font-size: 34px;
+  font-weight: 700;
   margin-top: 10px;
+  letter-spacing: 2px;
 }
 
+/* GRID */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
+  gap: 25px;
   padding: 20px;
 }
 
+/* CARD */
 .card {
-  background: rgba(255,255,255,0.6);
-  backdrop-filter: blur(10px);
-  border-radius: 16px;
-  padding: 10px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(12px);
+  border-radius: 18px;
+  padding: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+  transition: transform 0.3s ease;
 }
 
-iframe {
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* VIDEO (VERTICAL SHORTS) */
+.video-wrapper {
+  position: relative;
   width: 100%;
-  height: 460px;
+  padding-top: 177.77%; /* 9:16 ratio */
   border-radius: 12px;
+  overflow: hidden;
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   border: none;
 }
 
+/* BUTTON */
 button {
   width: 100%;
-  margin-top: 10px;
-  padding: 10px;
+  margin-top: 12px;
+  padding: 12px;
   border: none;
   border-radius: 10px;
-  background: #c27b48;
+  background: linear-gradient(135deg, #c27b48, #a65f30);
   color: white;
   font-weight: bold;
   cursor: pointer;
+  transition: all 0.25s ease;
 }
 
 button:hover {
-  background: #a65f30;
+  opacity: 0.9;
+  transform: scale(1.02);
 }
-</style>
 
+</style>
 </head>
 
 <body>
 
+<!-- HEADER -->
 <div class="header">
   <img src="logo.png" class="logo">
   <div class="title">POORNA TECH</div>
 </div>
 
+<!-- GRID -->
 <div class="grid" id="grid"></div>
 
 <script>
@@ -89,7 +120,9 @@ async function loadVideos() {
     card.className = 'card';
 
     card.innerHTML = `
-      <iframe src="https://www.youtube.com/embed/${item.videoId}" allowfullscreen></iframe>
+      <div class="video-wrapper">
+        <iframe src="https://www.youtube.com/embed/${item.videoId}" allowfullscreen></iframe>
+      </div>
       <button onclick="copyText(${index}, this)">Copy</button>
     `;
 
