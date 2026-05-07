@@ -1,9 +1,222 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My First Site</title>
+<meta charset="UTF-8">
+<title>Hand Strings</title>
+<style>
+body { margin:0; overflow:hidden; background:black; }
+canvas { display:block; }
+</style>
 </head>
 <body>
-  <h1>Hello, this is my GitHub Page 🚀</h1>
+<video id="video" autoplay playsinline style="display:none"></video>
+<canvas id="canvas"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+
+<script>
+const video = document.getElementById('video');
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+
+let W = canvas.width = window.innerWidth;
+let H = canvas.height = window.innerHeight;
+
+let frameCount = 0;
+let particles = [];
+let lastTrigger = {};
+
+function lerp(a, b, t) {
+  return a + (b - a) * t;
+}
+
+navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
+  video.srcObject = stream;
+});
+
+const hands = new Hands({
+  locateFile: file => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`
+});
+
+hands.setOptions({
+  maxNumHands: 2,
+  modelComplexity: 1,
+  minDetectionConfidence: 0.7,
+  minTrackingConfidence: 0.7
+});
+
+hands.onResults(results => {
+  draw(results);
+});
+
+const camera = new Camera(video, {
+  onFrame: async () => {
+    await hands.send({ image: video });
+  },
+  width: W,
+  height: H
+});
+
+camera.start();
+
+function spawnParticles(x, y) {
+  for (let i = 0; i < 28; i++) {
+    particles.push({
+      x, y,
+      vx: (Math.random() - 0.5) * 4,
+      vy: (Math.random() - 1.5) * 4,
+      trail: []
+    });
+  }
+}
+
+function updateParticles() {
+  particles.forEach(p => {
+    p.vy += 0.12;
+    p.vx *= 0.97;
+    p.x += p.vx;
+    p.y += p.vy;
+
+    p.trail.push({ x: p.x, y: p.y });
+    if (p.trail.length > 6) p.trail.shift();
+  });
+
+  particles = particles.filter(p => p.y < H + 50);
+}
+
+function drawParticles() {
+  particles.forEach(p => {
+    ctx.beginPath();
+    p.trail.forEach((t, i) => {
+      if (i === 0) ctx.moveTo(t.x, t.y);
+      else ctx.lineTo(t.x, t.y);
+    });
+    ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+    ctx.stroke();
+  });
+}
+
+function drawStrings(hands) {
+  if (hands.length < 2) return;
+
+  const tips = [4, 8, 12, 16, 20];
+
+  tips.forEach((i, index) => {
+    const a = hands[0][i];
+    const b = hands[1][i];
+
+    const x1 = a.x * W;
+    const y1 = a.y * H;
+    const x2 = b.x * W;
+    const y2 = b.y * H;
+
+    const dx = x2 - x1;
+    const dy = y2 - y1;
+    const dist = Math.hypot(dx, dy);
+    const t = Math.min(dist / (W * 0.8), 1);
+
+    const mx = (x1 + x2) / 2;
+    const my = (y1 + y2) / 2;
+
+    const offset = Math.sin(frameCount * 0.04 + index) * 8 * t;
+
+    const cx = mx + offset;
+    const cy = my + offset;
+
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.quadraticCurveTo(cx, cy, x2, y2);
+    ctx.lineWidth = lerp(4, 1.5, t);
+    ctx.strokeStyle = 'white';
+    ctx.stroke();
+
+    if (dist < 30) {
+      const key = index;
+      const now = Date.now();
+      if (!lastTrigger[key] || now - lastTrigger[key] > 400) {
+        spawnParticles(mx, my);
+        lastTrigger[key] = now;
+      }
+    }
+  });
+}
+
+function drawJoints(hands) {
+  hands.forEach(hand => {
+    hand.forEach((p, i) => {
+      const x = p.x * W;
+      const y = p.y * H;
+
+      const isTip = [4,8,12,16,20].includes(i);
+      const r = isTip ? 7 : 4;
+      const glow = isTip ? 24 : 12;
+
+      const g = ctx.createRadialGradient(x, y, 0, x, y, glow);
+      g.addColorStop(0, 'rgba(255,255,255,0.9)');
+      g.addColorStop(1, 'rgba(255,255,255,0)');
+
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(x, y, glow, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.fillStyle = 'white';
+      ctx.fill();
+    });
+
+    // intra-hand faint lines
+    const connections = [
+      [0,1],[1,2],[2,3],[3,4],
+      [0,5],[5,6],[6,7],[7,8],
+      [5,9],[9,10],[10,11],[11,12],
+      [9,13],[13,14],[14,15],[15,16],
+      [13,17],[17,18],[18,19],[19,20],
+      [0,17]
+    ];
+
+    connections.forEach(c => {
+      const a = hand[c[0]];
+      const b = hand[c[1]];
+      ctx.beginPath();
+      ctx.moveTo(a.x * W, a.y * H);
+      ctx.lineTo(b.x * W, b.y * H);
+      ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    });
+  });
+}
+
+function drawScanlines() {
+  for (let y = 0; y < H; y += 2) {
+    ctx.fillStyle = 'rgba(0,0,0,0.1)';
+    ctx.fillRect(0, y, W, 1);
+  }
+}
+
+function draw(results) {
+  frameCount++;
+
+  ctx.clearRect(0, 0, W, H);
+
+  ctx.drawImage(video, 0, 0, W, H);
+
+  ctx.fillStyle = 'rgba(0,0,0,0.12)';
+  ctx.fillRect(0, 0, W, H);
+
+  updateParticles();
+
+  if (results.multiHandLandmarks) {
+    drawStrings(results.multiHandLandmarks);
+    drawJoints(results.multiHandLandmarks);
+  }
+
+  drawParticles();
+  drawScanlines();
+}
+</script>
 </body>
 </html>
