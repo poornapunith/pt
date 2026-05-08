@@ -6,9 +6,7 @@
 <title>POORNA TECH</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -17,7 +15,6 @@ body {
   color: #4a2c1a;
 }
 
-/* HEADER */
 .header {
   text-align: center;
   padding: 40px 20px 20px;
@@ -32,10 +29,8 @@ body {
   font-size: 34px;
   font-weight: 700;
   margin-top: 10px;
-  letter-spacing: 2px;
 }
 
-/* GRID */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -43,39 +38,29 @@ body {
   padding: 20px;
 }
 
-/* CARD */
 .card {
   background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(12px);
   border-radius: 18px;
   padding: 12px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-  transition: transform 0.3s ease;
 }
 
-.card:hover {
-  transform: translateY(-5px);
-}
-
-/* VIDEO (VERTICAL SHORTS) */
 .video-wrapper {
   position: relative;
   width: 100%;
-  padding-top: 177.77%; /* 9:16 ratio */
+  padding-top: 177.77%;
   border-radius: 12px;
   overflow: hidden;
 }
 
 .video-wrapper iframe {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   border: none;
 }
 
-/* BUTTON */
 button {
   width: 100%;
   margin-top: 12px;
@@ -86,26 +71,17 @@ button {
   color: white;
   font-weight: bold;
   cursor: pointer;
-  transition: all 0.25s ease;
 }
-
-button:hover {
-  opacity: 0.9;
-  transform: scale(1.02);
-}
-
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
 <div class="header">
   <img src="logo.png" class="logo">
   <div class="title">POORNA TECH</div>
 </div>
 
-<!-- GRID -->
 <div class="grid" id="grid"></div>
 
 <script>
@@ -115,7 +91,7 @@ async function loadVideos() {
 
   const grid = document.getElementById('grid');
 
-  data.forEach((item, index) => {
+  data.forEach((item) => {
     const card = document.createElement('div');
     card.className = 'card';
 
@@ -123,22 +99,15 @@ async function loadVideos() {
       <div class="video-wrapper">
         <iframe src="https://www.youtube.com/embed/${item.videoId}" allowfullscreen></iframe>
       </div>
-      <button onclick="copyText(${index}, this)">Copy</button>
+      <button onclick="openDoc('${item.doc}')">Open Code</button>
     `;
 
     grid.appendChild(card);
   });
-
-  window.videoData = data;
 }
 
-function copyText(index, btn) {
-  const text = window.videoData[index].text;
-
-  navigator.clipboard.writeText(text).then(() => {
-    btn.innerText = "Copied!";
-    setTimeout(() => btn.innerText = "Copy", 1500);
-  });
+function openDoc(url) {
+  window.open(url, '_blank'); // opens in new tab
 }
 
 loadVideos();
