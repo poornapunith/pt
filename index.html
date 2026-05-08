@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Poorna Tech short-form videos and prompt library."
+    />
+    <title>Poorna Tech Prompts</title>
+    <link rel="preconnect" href="https://www.youtube.com" />
+    <link rel="preconnect" href="https://i.ytimg.com" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="topbar" aria-label="Main navigation">
+        <a class="brand" href="./" aria-label="Poorna Tech home">
+          <img src="Logo.jpeg" alt="Poorna Tech logo" />
+          <span>Poorna Tech</span>
+        </a>
+        <a class="youtube-link" href="#video-grid">
+          Browse Videos
+        </a>
+      </nav>
+
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Poorna Tech</p>
+          <h1 id="page-title">Short-Form Video Prompts</h1>
+        </div>
+        <div class="hero-mark" aria-hidden="true">
+          <img src="Logo.jpeg" alt="" />
+        </div>
+      </section>
+    </header>
+
+    <main>
+      <section class="library-heading" aria-labelledby="library-title">
+        <div>
+          <p class="eyebrow">Prompt vault</p>
+          <h2 id="library-title">Latest Shorts</h2>
+        </div>
+        <p id="video-count" class="video-count">Loading videos...</p>
+      </section>
+
+      <section id="video-grid" class="video-grid" aria-live="polite"></section>
+
+      <section id="empty-state" class="empty-state" hidden>
+        <h2>Videos coming soon</h2>
+        <p>
+          New Poorna Tech shorts and prompts will appear here.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>&copy; <span id="year"></span> Poorna Tech. Built for video prompts.</p>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
