@@ -1,0 +1,14 @@
+{
+  "videos": [
+    {
+      "title": "Poorna Tech Short 1",
+      "youtubeUrl": "https://youtube.com/shorts/z8ZYza7kwko?si=Ue7go8-bjdd4Yc--",
+      "promptUrl": "https://docs.google.com/document/d/1iOx4z0bYTX_MsJ-HL58MQhVVZISQ2jlRoXWPxk3B2Vs/edit?usp=sharing"
+    },
+    {
+      "title": "Poorna Tech Short 2",
+      "youtubeUrl": "https://youtube.com/shorts/PZdaBpEuidU?si=pCigqaSijdNS1dba",
+      "promptUrl": "https://docs.google.com/document/d/1ALEKAHovRvwsDvWb3MyUm_2EqaHoc3zfnZlyT-97Ujk/edit?usp=sharing"
+    }
+  ]
+}
