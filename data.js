@@ -1,5 +1,11 @@
 window.POORNA_TECH_VIDEOS = [
     {
+        title: "Intense Escalator fight scene",
+        youtubeUrl: "https://youtube.com/shorts/RSzg1sZHjHc?si=NjwJS2vex3mAIQs8",
+        promptUrl: "https://docs.google.com/document/d/15zMaXPo_LTrT09OJeK8BUZ3L4KXksqK345eA_JP2Tq0/edit?usp=sharing"
+    
+    },
+    {
         title: "Childhood Profile",
         youtubeUrl: "https://youtube.com/shorts/oz4j5p75UiQ?si=7jxlxLCaIPGkXgkd",
         promptUrl: "https://docs.google.com/document/d/1Ei_TCNLnRwFd8qZar2XA3b-gYhAmAboaYB9l0KdcXDw/edit?usp=sharing"

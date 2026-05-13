@@ -366,6 +366,27 @@ h1 {
   max-width: 340px;
 }
 
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.feature-grid article {
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+}
+
+.feature-grid h3 {
+  margin: 0 0 10px;
+  font-size: 1.05rem;
+}
+
+.feature-grid p {
+  margin-bottom: 0;
+  font-size: 0.96rem;
+}
+
 code {
   border-radius: 6px;
   background: rgba(117, 66, 34, 0.1);
@@ -427,6 +448,10 @@ code {
   .library-heading {
     align-items: start;
     flex-direction: column;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
   }
 }
 
