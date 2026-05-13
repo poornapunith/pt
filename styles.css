@@ -366,6 +366,38 @@ h1 {
   max-width: 340px;
 }
 
+.section-link {
+  margin: 24px 0 0;
+}
+
+.section-link a {
+  color: var(--copper-dark);
+  font-weight: 900;
+}
+
+.content-list {
+  display: grid;
+  gap: 26px;
+  margin-top: 30px;
+}
+
+.content-list article {
+  border-top: 1px solid var(--line);
+  padding-top: 22px;
+}
+
+.content-list h2,
+.content-list h3 {
+  margin: 0 0 10px;
+}
+
+.content-list ul {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
 .feature-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

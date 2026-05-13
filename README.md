@@ -8,7 +8,7 @@ Visit the website to watch the latest videos and open the matching prompt for ea
 
 This project powers the public Poorna Tech prompt library.
 
-The site includes public About, Contact, Privacy Policy, and Terms pages.
+The site includes public About, Contact, Guide, FAQ, Resources, Privacy Policy, and Terms pages.
 
 ## Follow
 

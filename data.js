@@ -36,7 +36,7 @@ window.POORNA_TECH_VIDEOS = [
     
     },
     {
-        title: "🎬 Metro Station fight scece",
+        title: "Metro Station Fight Scene",
         youtubeUrl: "https://youtube.com/shorts/kxaK-QkvuAM?si=KKyvnTXiGSkYBaO7",
         promptUrl: "https://docs.google.com/document/d/1i2XWvFKs7VhXjLh5FDFCh1ZtZMp95eYAO2D5-zZ0E8M/edit?usp=sharing"
     
@@ -60,7 +60,7 @@ window.POORNA_TECH_VIDEOS = [
     
     },
     {
-        title: "Claude built this from ONE prompt 😳",
+        title: "Claude Built This From One Prompt",
         youtubeUrl: "https://youtube.com/shorts/z8ZYza7kwko?si=Ue7go8-bjdd4Yc--",
         promptUrl: "https://docs.google.com/document/d/1iOx4z0bYTX_MsJ-HL58MQhVVZISQ2jlRoXWPxk3B2Vs/edit?usp=sharing"
     }
