@@ -1,5 +1,23 @@
 window.POORNA_TECH_VIDEOS = [
     {
+        title: "Dubai Sky Diving",
+        youtubeUrl: "https://youtube.com/shorts/GI70y7vZnS4?si=-4ujrYbsmHXeGskT",
+        promptUrl: "https://docs.google.com/document/d/11U_5bWCxtx6PYSEeMA2rAirH-rD3R2ZyIkZPjbkKaVo/edit?usp=sharing"
+    
+    },
+    {
+        title: "IPL Audience Scene",
+        youtubeUrl: "https://youtube.com/shorts/I_9hZmcwYoI?si=Zp95Iub7aEPnBfYD",
+        promptUrl: "https://docs.google.com/document/d/1KleTnBx2ndAdcoGafzbyvyQrItJzalJ4wTqdejtrVs0/edit?usp=sharing"
+    
+    },
+    {
+        title: "Devarafight scene",
+        youtubeUrl: "https://youtube.com/shorts/RnWY77n5Gmc?si=lxWShphoxmemSrHm",
+        promptUrl: "https://docs.google.com/document/d/1DFLuh1o7A63Ae7yLlDa96Q6mFJxniU1se3t11_6Hz5Y/edit?usp=sharing"
+    
+    },
+    {
         title: "Intense Escalator fight scene",
         youtubeUrl: "https://youtube.com/shorts/RSzg1sZHjHc?si=NjwJS2vex3mAIQs8",
         promptUrl: "https://docs.google.com/document/d/15zMaXPo_LTrT09OJeK8BUZ3L4KXksqK345eA_JP2Tq0/edit?usp=sharing"
