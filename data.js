@@ -12,13 +12,13 @@ window.POORNA_TECH_VIDEOS = [
     
     },
     {
-        title: "Devarafight scene",
+        title: "Devara Cinematic Action Scene",
         youtubeUrl: "https://youtube.com/shorts/RnWY77n5Gmc?si=lxWShphoxmemSrHm",
         promptUrl: "https://docs.google.com/document/d/1DFLuh1o7A63Ae7yLlDa96Q6mFJxniU1se3t11_6Hz5Y/edit?usp=sharing"
     
     },
     {
-        title: "Intense Escalator fight scene",
+        title: "Intense Escalator Action Scene",
         youtubeUrl: "https://youtube.com/shorts/RSzg1sZHjHc?si=NjwJS2vex3mAIQs8",
         promptUrl: "https://docs.google.com/document/d/15zMaXPo_LTrT09OJeK8BUZ3L4KXksqK345eA_JP2Tq0/edit?usp=sharing"
     
@@ -54,7 +54,7 @@ window.POORNA_TECH_VIDEOS = [
     
     },
     {
-        title: "Metro Station Fight Scene",
+        title: "Metro Station Action Scene",
         youtubeUrl: "https://youtube.com/shorts/kxaK-QkvuAM?si=KKyvnTXiGSkYBaO7",
         promptUrl: "https://docs.google.com/document/d/1i2XWvFKs7VhXjLh5FDFCh1ZtZMp95eYAO2D5-zZ0E8M/edit?usp=sharing"
     
@@ -72,7 +72,7 @@ window.POORNA_TECH_VIDEOS = [
     
     },
     {
-        title: "Classroom Fight Scene",
+        title: "Classroom Action Scene",
         youtubeUrl: "https://youtube.com/shorts/PZdaBpEuidU?si=pCigqaSijdNS1dba",
         promptUrl: "https://docs.google.com/document/d/1ALEKAHovRvwsDvWb3MyUm_2EqaHoc3zfnZlyT-97Ujk/edit?usp=sharing"
     
