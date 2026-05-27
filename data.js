@@ -1,5 +1,23 @@
 window.POORNA_TECH_VIDEOS = [
     {
+        title: "Robo Chick Prompt",
+        youtubeUrl: "https://youtube.com/shorts/6toBb5VETAA?si=YJz5OfR7WLQ8g9m9",
+        promptUrl: "https://docs.google.com/document/d/1-fH5UUMuYve_wd4B-k-lHr9Q9o4WoAxu3Z4t0YnO718/edit?usp=sharing"
+    
+    },
+    {
+        title: "IPL Batsman Prompt",
+        youtubeUrl: "https://youtube.com/shorts/bIf4Pw-PiSs?si=1GBBBctt6zdX7_wh",
+        promptUrl: "https://docs.google.com/document/d/1q4MzOKq4y6qFNtY_kcfc8BmZBRhMdPINv7jZvKH-Rv8/edit?usp=sharing"
+    
+    },
+    {
+        title: "Bhagavad Gita Image",
+        youtubeUrl: "https://youtube.com/shorts/j-PPfKtAuRs?si=Ne6KPVbBP82HCAFb",
+        promptUrl: "https://docs.google.com/document/d/1m2-lKE7fAeQpC4GUy46EzZ6XaYtdRvs6tMxldkmKdf4/edit?usp=sharing"
+    
+    },
+    {
         title: "Dubai Sky Diving",
         youtubeUrl: "https://youtube.com/shorts/GI70y7vZnS4?si=-4ujrYbsmHXeGskT",
         promptUrl: "https://docs.google.com/document/d/11U_5bWCxtx6PYSEeMA2rAirH-rD3R2ZyIkZPjbkKaVo/edit?usp=sharing"
