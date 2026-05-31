@@ -52,6 +52,12 @@ const getYouTubeId = (value = "") => {
 
 const getYouTubeUrl = (youtubeId) => `https://www.youtube.com/watch?v=${youtubeId}`;
 
+const slugify = (value = "") =>
+  String(value)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
 const sendPlayerCommand = (iframe, command) => {
   if (!iframe?.contentWindow) {
     return;
@@ -118,6 +124,7 @@ const renderVideos = (videos = []) => {
       const title = escapeHtml(video.title || "Poorna Tech Short");
       const promptUrl = escapeHtml(video.promptUrl || "#");
       const watchUrl = escapeHtml(video.youtubeUrl || getYouTubeUrl(youtubeId));
+      const guideUrl = `prompt-library.html#${slugify(video.title || youtubeId)}`;
       const isDirectFileOpen = window.location.protocol === "file:";
 
       if (!youtubeId) {
@@ -152,9 +159,14 @@ const renderVideos = (videos = []) => {
           </div>
           <div class="video-content">
             <h3 class="video-title">${title}</h3>
-            <a class="prompt-button" href="${promptUrl}" target="_blank" rel="noreferrer">
-              PROMPT
-            </a>
+            <div class="prompt-actions">
+              <a class="prompt-button" href="${guideUrl}">
+                View Guide
+              </a>
+              <a class="prompt-button secondary-button" href="${promptUrl}" target="_blank" rel="noreferrer">
+                Prompt Doc
+              </a>
+            </div>
           </div>
         </article>
       `;
