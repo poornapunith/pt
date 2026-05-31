@@ -124,7 +124,7 @@ const renderVideos = (videos = []) => {
       const title = escapeHtml(video.title || "Poorna Tech Short");
       const promptUrl = escapeHtml(video.promptUrl || "#");
       const watchUrl = escapeHtml(video.youtubeUrl || getYouTubeUrl(youtubeId));
-      const guideUrl = `prompt-library.html#${slugify(video.title || youtubeId)}`;
+      const guideUrl = `prompts/${slugify(video.title || youtubeId)}.html`;
       const isDirectFileOpen = window.location.protocol === "file:";
 
       if (!youtubeId) {
