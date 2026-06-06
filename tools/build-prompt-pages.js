@@ -287,9 +287,36 @@ const getOutputLabel = (title) => {
   return "AI video";
 };
 
+const buildFallbackDetails = (video, index) => {
+  const title = video.title;
+  const imagePrompt = isImagePrompt(title);
+  const publicResource = isPublicResource(title);
+  const tool = getToolLabel(title);
+  const output = getOutputLabel(title).toLowerCase();
+  const previous = videos[(index - 1 + videos.length) % videos.length];
+  const next = videos[(index + 1) % videos.length];
+
+  return {
+    category: publicResource
+      ? "Creative resource"
+      : imagePrompt
+        ? "Image prompt"
+        : "Video prompt",
+    summary: `${title} is a Poorna Tech ${output} resource with an on-site guide, video reference, and linked working prompt document.`,
+    learn: imagePrompt
+      ? `This prompt is useful for studying how a still image idea is built from subject, framing, lighting, style, and mood. Use the video reference to understand the final visual direction, then study how the prompt describes the composition in a clear and reusable way.`
+      : `This prompt is useful for studying how a short AI video idea is built from subject, movement, camera direction, setting, and mood. Use the video reference to understand the final result, then study how the prompt turns that idea into clear creative instructions for ${tool}.`,
+    customize: imagePrompt
+      ? "Change the subject, background, art style, camera angle, lighting, colour palette, and mood. Keep the main structure of the prompt, but replace the details so the result becomes your own original image."
+      : "Change the subject, location, camera movement, time of day, outfit, background activity, and emotional tone. Keep the prompt structure, but replace the details so the final video feels original instead of copied.",
+    notes: "Use these prompts as learning references. Review generated results before publishing, avoid misleading claims, and do not copy protected characters, brands, or real-person likenesses without permission.",
+    related: [slugify(previous.title), slugify(next.title), "guide"]
+  };
+};
+
 const pageTemplate = (video, index) => {
   const slug = slugify(video.title);
-  const detail = details[slug];
+  const detail = details[slug] || buildFallbackDetails(video, index);
   const title = escapeHtml(video.title);
   const description = escapeHtml(detail.summary);
   const youtubeId = getYouTubeId(video.youtubeUrl);
@@ -432,7 +459,7 @@ for (const [index, video] of videos.entries()) {
   const slug = slugify(video.title);
 
   if (!details[slug]) {
-    throw new Error(`Missing prompt details for ${video.title}`);
+    details[slug] = buildFallbackDetails(video, index);
   }
 
   fs.writeFileSync(path.join(promptDir, `${slug}.html`), pageTemplate(video, index));

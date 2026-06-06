@@ -1,5 +1,35 @@
 window.POORNA_TECH_VIDEOS = [
     {
+        title: "Ghost Love Image Prompt",
+        youtubeUrl: "https://youtube.com/shorts/aa3N2IpWkig?si=16MEWQB32c6PdDMr",
+        promptUrl: "https://docs.google.com/document/d/16Brgb1hxeOQbTzZEYGCFHifuirsddcoUU3xlpmiXW94/edit?usp=sharing"
+    
+    },
+    {
+        title: "Kawasaki Ride Prompt",
+        youtubeUrl: "https://youtube.com/shorts/lMXkGP8ayTQ?si=UvnCGKY2aoIaJrxq",
+        promptUrl: "https://docs.google.com/document/d/11HyB421G_3JM1GHBSkIYWSqGvXkDJJ2Jfg_auyDqcxg/edit?usp=sharing"
+    
+    },
+    {
+        title: "Cinematic top-down shot Image",
+        youtubeUrl: "https://youtube.com/shorts/PxJRsLg7MJg?si=rfopeku6EbxFzqiY",
+        promptUrl: "https://docs.google.com/document/d/19kPvf3o9w57WJrAHmVO7-oV7AE1_Ud9E-keXqfPAFDE/edit?usp=sharing"
+    
+    },
+    {
+        title: "Magadheera Horse Riding scene",
+        youtubeUrl: "https://youtube.com/shorts/VZLEyZPP8jY?si=xGiLF2A6Nf-OtBY9",
+        promptUrl: "https://docs.google.com/document/d/1hVqqZeaUAt4B-f7nLZjlO4InpWBT-eTrEEu5uqd6G5A/edit?usp=sharing"
+    
+    },
+    {
+        title: "Peddi Image Prompt",
+        youtubeUrl: "https://youtube.com/shorts/7zARw4Z81_I?si=4nGbWzJIH9FsnlZf",
+        promptUrl: "https://docs.google.com/document/d/156FrsQCafrliRZue2bfjxSLtXPzGpXDtPXj1homSRuE/edit?usp=sharing"
+    
+    },
+    {
         title: "Robo Chick Prompt",
         youtubeUrl: "https://youtube.com/shorts/6toBb5VETAA?si=YJz5OfR7WLQ8g9m9",
         promptUrl: "https://docs.google.com/document/d/1-fH5UUMuYve_wd4B-k-lHr9Q9o4WoAxu3Z4t0YnO718/edit?usp=sharing"
