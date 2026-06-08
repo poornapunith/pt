@@ -23,6 +23,7 @@
         </a>
         <div class="nav-links">
           <a href="../prompt-library.html">Prompts</a>
+          <a href="../videos.html">Videos</a>
           <a href="../guide.html">Guide</a>
           <a href="../glossary.html">Glossary</a>
           <a href="../contact.html">Contact</a>
@@ -43,18 +44,24 @@
 
       <div class="prompt-detail-layout">
         <div class="prompt-video-panel">
-          <div class="video-frame">
-            <iframe
-              src="https://www.youtube-nocookie.com/embed/PxJRsLg7MJg?rel=0"
-              title="Cinematic top-down shot Image"
+          <a class="video-thumbnail prompt-thumbnail detail-thumbnail" href="../videos.html" aria-label="Open Poorna Tech videos">
+            <img
+              src="https://i.ytimg.com/vi/PxJRsLg7MJg/oardefault.jpg"
+              onerror="this.src='https://i.ytimg.com/vi/PxJRsLg7MJg/hqdefault.jpg'"
+              alt="Cinematic top-down shot Image"
               loading="lazy"
-              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen>
-            </iframe>
-          </div>
+            />
+            <span class="card-badge">Video thumbnail</span>
+          </a>
         </div>
 
         <article class="prompt-detail-copy">
+          <h2>Copy starter prompt</h2>
+          <div class="copy-panel">
+            <p>Create an image inspired by &quot;Cinematic top-down shot Image&quot;. Use ChatGPT / Gemini. Focus on a clear subject, strong visual composition, cinematic lighting, realistic detail, and a polished vertical 9:16 social-media result. Customize the subject, setting, colors, camera angle, and mood to make the final output original.</p>
+            <button class="prompt-button" type="button" data-copy-prompt data-prompt="Create an image inspired by &quot;Cinematic top-down shot Image&quot;. Use ChatGPT / Gemini. Focus on a clear subject, strong visual composition, cinematic lighting, realistic detail, and a polished vertical 9:16 social-media result. Customize the subject, setting, colors, camera angle, and mood to make the final output original.">Copy Prompt</button>
+          </div>
+
           <h2>What this prompt teaches</h2>
           <p>This prompt is useful for studying how a still image idea is built from subject, framing, lighting, style, and mood. Use the video reference to understand the final visual direction, then study how the prompt describes the composition in a clear and reusable way.</p>
 
@@ -66,7 +73,7 @@
 
           <div class="prompt-actions detail-actions">
             <a class="prompt-button" href="https://docs.google.com/document/d/19kPvf3o9w57WJrAHmVO7-oV7AE1_Ud9E-keXqfPAFDE/edit?usp=sharing" target="_blank" rel="noreferrer">Open prompt document</a>
-            <a class="prompt-button secondary-button" href="https://youtube.com/shorts/PxJRsLg7MJg?si=rfopeku6EbxFzqiY" target="_blank" rel="noreferrer">Watch video</a>
+            <a class="prompt-button secondary-button" href="../videos.html">Watch videos</a>
           </div>
         </article>
       </div>
@@ -94,6 +101,7 @@
       <nav class="footer-links" aria-label="Footer navigation">
         <a href="../">Home</a>
         <a href="../prompt-library.html">Prompts</a>
+        <a href="../videos.html">Videos</a>
         <a href="../guide.html">Guide</a>
         <a href="../blog.html">Blog</a>
         <a href="../editorial-standards.html">Editorial Standards</a>
@@ -105,6 +113,20 @@
 
     <script>
       document.querySelector("#year").textContent = new Date().getFullYear();
+      document.querySelectorAll("[data-copy-prompt]").forEach((button) => {
+        button.addEventListener("click", async () => {
+          const originalText = button.textContent;
+          try {
+            await navigator.clipboard.writeText(button.dataset.prompt || "");
+            button.textContent = "Copied";
+          } catch {
+            button.textContent = "Copy failed";
+          }
+          window.setTimeout(() => {
+            button.textContent = originalText;
+          }, 1400);
+        });
+      });
     </script>
   </body>
 </html>

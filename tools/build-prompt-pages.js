@@ -287,6 +287,18 @@ const getOutputLabel = (title) => {
   return "AI video";
 };
 
+const getPromptCopy = (video = {}) => {
+  if (video.promptText || video.copyPrompt || video.promptPreview) {
+    return video.promptText || video.copyPrompt || video.promptPreview;
+  }
+
+  const title = video.title || "Poorna Tech prompt";
+  const tool = getToolLabel(title);
+  const outputType = isImagePrompt(title) ? "an image" : "a short AI video";
+
+  return `Create ${outputType} inspired by "${title}". Use ${tool}. Focus on a clear subject, strong visual composition, cinematic lighting, realistic detail, and a polished vertical 9:16 social-media result. Customize the subject, setting, colors, camera angle, and mood to make the final output original.`;
+};
+
 const buildFallbackDetails = (video, index) => {
   const title = video.title;
   const imagePrompt = isImagePrompt(title);
@@ -323,6 +335,7 @@ const pageTemplate = (video, index) => {
   const toolLabel = getToolLabel(video.title);
   const outputLabel = getOutputLabel(video.title);
   const promptButton = isPublicResource(video.title) ? "Open resource" : "Open prompt document";
+  const promptCopy = getPromptCopy(video);
   const relatedLinks = detail.related
     .map((item) => {
       if (sitePages[item]) {
@@ -364,6 +377,7 @@ const pageTemplate = (video, index) => {
         </a>
         <div class="nav-links">
           <a href="../prompt-library.html">Prompts</a>
+          <a href="../videos.html">Videos</a>
           <a href="../guide.html">Guide</a>
           <a href="../glossary.html">Glossary</a>
           <a href="../contact.html">Contact</a>
@@ -384,18 +398,24 @@ const pageTemplate = (video, index) => {
 
       <div class="prompt-detail-layout">
         <div class="prompt-video-panel">
-          <div class="video-frame">
-            <iframe
-              src="https://www.youtube-nocookie.com/embed/${youtubeId}?rel=0"
-              title="${title}"
+          <a class="video-thumbnail prompt-thumbnail detail-thumbnail" href="../videos.html" aria-label="Open Poorna Tech videos">
+            <img
+              src="https://i.ytimg.com/vi/${youtubeId}/oardefault.jpg"
+              onerror="this.src='https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg'"
+              alt="${title}"
               loading="lazy"
-              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen>
-            </iframe>
-          </div>
+            />
+            <span class="card-badge">Video thumbnail</span>
+          </a>
         </div>
 
         <article class="prompt-detail-copy">
+          <h2>Copy starter prompt</h2>
+          <div class="copy-panel">
+            <p>${escapeHtml(promptCopy)}</p>
+            <button class="prompt-button" type="button" data-copy-prompt data-prompt="${escapeHtml(promptCopy)}">Copy Prompt</button>
+          </div>
+
           <h2>What this prompt teaches</h2>
           <p>${escapeHtml(detail.learn)}</p>
 
@@ -407,7 +427,7 @@ const pageTemplate = (video, index) => {
 
           <div class="prompt-actions detail-actions">
             <a class="prompt-button" href="${escapeHtml(video.promptUrl)}" target="_blank" rel="noreferrer">${promptButton}</a>
-            <a class="prompt-button secondary-button" href="${escapeHtml(video.youtubeUrl)}" target="_blank" rel="noreferrer">Watch video</a>
+            <a class="prompt-button secondary-button" href="../videos.html">Watch videos</a>
           </div>
         </article>
       </div>
@@ -435,6 +455,7 @@ const pageTemplate = (video, index) => {
       <nav class="footer-links" aria-label="Footer navigation">
         <a href="../">Home</a>
         <a href="../prompt-library.html">Prompts</a>
+        <a href="../videos.html">Videos</a>
         <a href="../guide.html">Guide</a>
         <a href="../blog.html">Blog</a>
         <a href="../editorial-standards.html">Editorial Standards</a>
@@ -446,6 +467,20 @@ const pageTemplate = (video, index) => {
 
     <script>
       document.querySelector("#year").textContent = new Date().getFullYear();
+      document.querySelectorAll("[data-copy-prompt]").forEach((button) => {
+        button.addEventListener("click", async () => {
+          const originalText = button.textContent;
+          try {
+            await navigator.clipboard.writeText(button.dataset.prompt || "");
+            button.textContent = "Copied";
+          } catch {
+            button.textContent = "Copy failed";
+          }
+          window.setTimeout(() => {
+            button.textContent = originalText;
+          }, 1400);
+        });
+      });
     </script>
   </body>
 </html>
@@ -467,6 +502,7 @@ for (const [index, video] of videos.entries()) {
 
 const baseUrls = [
   "",
+  "videos.html",
   "about.html",
   "prompt-library.html",
   "glossary.html",

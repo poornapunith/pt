@@ -9,7 +9,8 @@ Visit the website to watch the latest videos and open the matching prompt for ea
 This project powers the public Poorna Tech prompt library.
 
 The site includes public About, Contact, Guide, FAQ, Resources, Privacy Policy,
-Terms, blog, glossary, editorial, and individual prompt guide pages.
+Terms, blog, glossary, editorial, individual prompt guide pages, and a separate
+videos page for embedded Shorts.
 
 ## Updating Prompts
 
@@ -22,7 +23,8 @@ guide page. After editing `data.js`, run:
 node tools/build-prompt-pages.js
 ```
 
-That updates the prompt pages and `sitemap.xml`.
+That updates the prompt pages and `sitemap.xml`. The home page uses thumbnail
+prompt cards; `videos.html` is where the embedded YouTube videos appear.
 
 ## Follow
 

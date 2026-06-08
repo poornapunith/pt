@@ -23,6 +23,7 @@
         </a>
         <div class="nav-links">
           <a href="../prompt-library.html">Prompts</a>
+          <a href="../videos.html">Videos</a>
           <a href="../guide.html">Guide</a>
           <a href="../glossary.html">Glossary</a>
           <a href="../contact.html">Contact</a>
@@ -43,18 +44,24 @@
 
       <div class="prompt-detail-layout">
         <div class="prompt-video-panel">
-          <div class="video-frame">
-            <iframe
-              src="https://www.youtube-nocookie.com/embed/6toBb5VETAA?rel=0"
-              title="Robo Chick Prompt"
+          <a class="video-thumbnail prompt-thumbnail detail-thumbnail" href="../videos.html" aria-label="Open Poorna Tech videos">
+            <img
+              src="https://i.ytimg.com/vi/6toBb5VETAA/oardefault.jpg"
+              onerror="this.src='https://i.ytimg.com/vi/6toBb5VETAA/hqdefault.jpg'"
+              alt="Robo Chick Prompt"
               loading="lazy"
-              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen>
-            </iframe>
-          </div>
+            />
+            <span class="card-badge">Video thumbnail</span>
+          </a>
         </div>
 
         <article class="prompt-detail-copy">
+          <h2>Copy starter prompt</h2>
+          <div class="copy-panel">
+            <p>Create a short AI video inspired by &quot;Robo Chick Prompt&quot;. Use Seedance 2.0. Focus on a clear subject, strong visual composition, cinematic lighting, realistic detail, and a polished vertical 9:16 social-media result. Customize the subject, setting, colors, camera angle, and mood to make the final output original.</p>
+            <button class="prompt-button" type="button" data-copy-prompt data-prompt="Create a short AI video inspired by &quot;Robo Chick Prompt&quot;. Use Seedance 2.0. Focus on a clear subject, strong visual composition, cinematic lighting, realistic detail, and a polished vertical 9:16 social-media result. Customize the subject, setting, colors, camera angle, and mood to make the final output original.">Copy Prompt</button>
+          </div>
+
           <h2>What this prompt teaches</h2>
           <p>This page is useful when you want a character to feel designed rather than random. The prompt works because it gives the model a clear subject, a surface treatment, a personality cue, and a small action. Those details help the final video read like a finished concept instead of a loose experiment.</p>
 
@@ -66,7 +73,7 @@
 
           <div class="prompt-actions detail-actions">
             <a class="prompt-button" href="https://docs.google.com/document/d/1-fH5UUMuYve_wd4B-k-lHr9Q9o4WoAxu3Z4t0YnO718/edit?usp=sharing" target="_blank" rel="noreferrer">Open prompt document</a>
-            <a class="prompt-button secondary-button" href="https://youtube.com/shorts/6toBb5VETAA?si=YJz5OfR7WLQ8g9m9" target="_blank" rel="noreferrer">Watch video</a>
+            <a class="prompt-button secondary-button" href="../videos.html">Watch videos</a>
           </div>
         </article>
       </div>
@@ -94,6 +101,7 @@
       <nav class="footer-links" aria-label="Footer navigation">
         <a href="../">Home</a>
         <a href="../prompt-library.html">Prompts</a>
+        <a href="../videos.html">Videos</a>
         <a href="../guide.html">Guide</a>
         <a href="../blog.html">Blog</a>
         <a href="../editorial-standards.html">Editorial Standards</a>
@@ -105,6 +113,20 @@
 
     <script>
       document.querySelector("#year").textContent = new Date().getFullYear();
+      document.querySelectorAll("[data-copy-prompt]").forEach((button) => {
+        button.addEventListener("click", async () => {
+          const originalText = button.textContent;
+          try {
+            await navigator.clipboard.writeText(button.dataset.prompt || "");
+            button.textContent = "Copied";
+          } catch {
+            button.textContent = "Copy failed";
+          }
+          window.setTimeout(() => {
+            button.textContent = originalText;
+          }, 1400);
+        });
+      });
     </script>
   </body>
 </html>

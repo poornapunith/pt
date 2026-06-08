@@ -23,6 +23,7 @@
         </a>
         <div class="nav-links">
           <a href="../prompt-library.html">Prompts</a>
+          <a href="../videos.html">Videos</a>
           <a href="../guide.html">Guide</a>
           <a href="../glossary.html">Glossary</a>
           <a href="../contact.html">Contact</a>
@@ -43,18 +44,24 @@
 
       <div class="prompt-detail-layout">
         <div class="prompt-video-panel">
-          <div class="video-frame">
-            <iframe
-              src="https://www.youtube-nocookie.com/embed/I_9hZmcwYoI?rel=0"
-              title="IPL Audience Scene"
+          <a class="video-thumbnail prompt-thumbnail detail-thumbnail" href="../videos.html" aria-label="Open Poorna Tech videos">
+            <img
+              src="https://i.ytimg.com/vi/I_9hZmcwYoI/oardefault.jpg"
+              onerror="this.src='https://i.ytimg.com/vi/I_9hZmcwYoI/hqdefault.jpg'"
+              alt="IPL Audience Scene"
               loading="lazy"
-              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen>
-            </iframe>
-          </div>
+            />
+            <span class="card-badge">Video thumbnail</span>
+          </a>
         </div>
 
         <article class="prompt-detail-copy">
+          <h2>Copy starter prompt</h2>
+          <div class="copy-panel">
+            <p>Create a short AI video inspired by &quot;IPL Audience Scene&quot;. Use Seedance 2.0. Focus on a clear subject, strong visual composition, cinematic lighting, realistic detail, and a polished vertical 9:16 social-media result. Customize the subject, setting, colors, camera angle, and mood to make the final output original.</p>
+            <button class="prompt-button" type="button" data-copy-prompt data-prompt="Create a short AI video inspired by &quot;IPL Audience Scene&quot;. Use Seedance 2.0. Focus on a clear subject, strong visual composition, cinematic lighting, realistic detail, and a polished vertical 9:16 social-media result. Customize the subject, setting, colors, camera angle, and mood to make the final output original.">Copy Prompt</button>
+          </div>
+
           <h2>What this prompt teaches</h2>
           <p>Crowd prompts can become messy if they only say &#039;audience cheering&#039;. This example is about giving the model a clear venue, lighting direction, colour accents, camera height, and emotional rhythm so the shot stays readable.</p>
 
@@ -66,7 +73,7 @@
 
           <div class="prompt-actions detail-actions">
             <a class="prompt-button" href="https://docs.google.com/document/d/1KleTnBx2ndAdcoGafzbyvyQrItJzalJ4wTqdejtrVs0/edit?usp=sharing" target="_blank" rel="noreferrer">Open prompt document</a>
-            <a class="prompt-button secondary-button" href="https://youtube.com/shorts/I_9hZmcwYoI?si=Zp95Iub7aEPnBfYD" target="_blank" rel="noreferrer">Watch video</a>
+            <a class="prompt-button secondary-button" href="../videos.html">Watch videos</a>
           </div>
         </article>
       </div>
@@ -94,6 +101,7 @@
       <nav class="footer-links" aria-label="Footer navigation">
         <a href="../">Home</a>
         <a href="../prompt-library.html">Prompts</a>
+        <a href="../videos.html">Videos</a>
         <a href="../guide.html">Guide</a>
         <a href="../blog.html">Blog</a>
         <a href="../editorial-standards.html">Editorial Standards</a>
@@ -105,6 +113,20 @@
 
     <script>
       document.querySelector("#year").textContent = new Date().getFullYear();
+      document.querySelectorAll("[data-copy-prompt]").forEach((button) => {
+        button.addEventListener("click", async () => {
+          const originalText = button.textContent;
+          try {
+            await navigator.clipboard.writeText(button.dataset.prompt || "");
+            button.textContent = "Copied";
+          } catch {
+            button.textContent = "Copy failed";
+          }
+          window.setTimeout(() => {
+            button.textContent = originalText;
+          }, 1400);
+        });
+      });
     </script>
   </body>
 </html>

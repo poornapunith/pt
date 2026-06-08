@@ -127,7 +127,7 @@ window.POORNA_TECH_VIDEOS = [
     },
     {
         title: "Claude Built This From One Prompt",
-        youtubeUrl: "https://youtube.com/shorts/z8ZYza7kwko?si=Ue7go8-bjdd4Yc--",
+        youtubeUrl: "https://youtube.com/shorts/z8ZYza7kwko?si=B65KjKzLqEYNtSh4",
         promptUrl: "https://docs.google.com/document/d/1iOx4z0bYTX_MsJ-HL58MQhVVZISQ2jlRoXWPxk3B2Vs/edit?usp=sharing"
     }
     

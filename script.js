@@ -2,7 +2,7 @@ const grid = document.querySelector("#video-grid");
 const emptyState = document.querySelector("#empty-state");
 const videoCount = document.querySelector("#video-count");
 const year = document.querySelector("#year");
-const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+const pageMode = document.body.dataset.page || "prompts";
 
 year.textContent = new Date().getFullYear();
 
@@ -52,58 +52,70 @@ const getYouTubeId = (value = "") => {
 
 const getYouTubeUrl = (youtubeId) => `https://www.youtube.com/watch?v=${youtubeId}`;
 
+const isImagePrompt = (title = "") => title.toLowerCase().includes("image");
+const isPublicResource = (title = "") => title.toLowerCase().includes("landsat");
+
+const getToolLabel = (title = "") => {
+  if (isPublicResource(title)) return "Public Resource";
+  if (isImagePrompt(title)) return "ChatGPT / Gemini";
+  if (title.toLowerCase().includes("claude")) return "AI Workflow";
+  return "Seedance 2.0";
+};
+
+const getCategoryLabel = (title = "") => {
+  const lowerTitle = title.toLowerCase();
+
+  if (isPublicResource(title)) return "Resource";
+  if (isImagePrompt(title)) return "Image";
+  if (lowerTitle.includes("action")) return "Action";
+  if (lowerTitle.includes("sky") || lowerTitle.includes("airport") || lowerTitle.includes("ride")) return "Travel";
+  if (lowerTitle.includes("ipl") || lowerTitle.includes("batsman")) return "Sports";
+  if (lowerTitle.includes("gita") || lowerTitle.includes("govind") || lowerTitle.includes("tvk")) return "Concept";
+  if (lowerTitle.includes("claude")) return "Workflow";
+
+  return "Video";
+};
+
+const getPromptCopy = (video = {}) => {
+  if (video.promptText || video.copyPrompt || video.promptPreview) {
+    return video.promptText || video.copyPrompt || video.promptPreview;
+  }
+
+  const title = video.title || "Poorna Tech prompt";
+  const tool = getToolLabel(title);
+  const outputType = isImagePrompt(title) ? "an image" : "a short AI video";
+
+  return `Create ${outputType} inspired by "${title}". Use ${tool}. Focus on a clear subject, strong visual composition, cinematic lighting, realistic detail, and a polished vertical 9:16 social-media result. Customize the subject, setting, colors, camera angle, and mood to make the final output original.`;
+};
+
 const slugify = (value = "") =>
   String(value)
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 
-const sendPlayerCommand = (iframe, command) => {
-  if (!iframe?.contentWindow) {
-    return;
-  }
+const copyPrompt = async (button) => {
+  const prompt = button.dataset.prompt || "";
+  const originalText = button.textContent;
 
-  iframe.contentWindow.postMessage(
-    JSON.stringify({
-      event: "command",
-      func: command,
-      args: []
-    }),
-    "*"
-  );
+  try {
+    await navigator.clipboard.writeText(prompt);
+    button.textContent = "Copied";
+    window.setTimeout(() => {
+      button.textContent = originalText;
+    }, 1400);
+  } catch {
+    button.textContent = "Copy failed";
+    window.setTimeout(() => {
+      button.textContent = originalText;
+    }, 1400);
+  }
 };
 
-const setupAutoplay = () => {
-  const cards = [...document.querySelectorAll(".video-card")];
-
-  if (window.location.protocol === "file:") {
-    return;
-  }
-
-  if (canHover) {
-    cards.forEach((card) => {
-      const iframe = card.querySelector("iframe");
-
-      card.addEventListener("mouseenter", () => sendPlayerCommand(iframe, "playVideo"));
-      card.addEventListener("mouseleave", () => sendPlayerCommand(iframe, "pauseVideo"));
-      card.addEventListener("focusin", () => sendPlayerCommand(iframe, "playVideo"));
-      card.addEventListener("focusout", () => sendPlayerCommand(iframe, "pauseVideo"));
-    });
-
-    return;
-  }
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const iframe = entry.target.querySelector("iframe");
-        sendPlayerCommand(iframe, entry.isIntersecting ? "playVideo" : "pauseVideo");
-      });
-    },
-    { threshold: 0.72 }
-  );
-
-  cards.forEach((card) => observer.observe(card));
+const setupCopyButtons = () => {
+  document.querySelectorAll("[data-copy-prompt]").forEach((button) => {
+    button.addEventListener("click", () => copyPrompt(button));
+  });
 };
 
 const renderVideos = (videos = []) => {
@@ -116,7 +128,8 @@ const renderVideos = (videos = []) => {
   }
 
   emptyState.hidden = true;
-  videoCount.textContent = `${videos.length} video${videos.length === 1 ? "" : "s"}`;
+  const itemLabel = pageMode === "videos" ? "video" : "prompt";
+  videoCount.textContent = `${videos.length} ${itemLabel}${videos.length === 1 ? "" : "s"}`;
 
   const cards = videos
     .map((video) => {
@@ -125,45 +138,61 @@ const renderVideos = (videos = []) => {
       const promptUrl = escapeHtml(video.promptUrl || "#");
       const watchUrl = escapeHtml(video.youtubeUrl || getYouTubeUrl(youtubeId));
       const guideUrl = `prompts/${slugify(video.title || youtubeId)}.html`;
-      const isDirectFileOpen = window.location.protocol === "file:";
+      const category = escapeHtml(video.category || getCategoryLabel(video.title || ""));
+      const tool = escapeHtml(video.tool || getToolLabel(video.title || ""));
+      const promptCopy = escapeHtml(getPromptCopy(video));
 
       if (!youtubeId) {
         return "";
       }
 
-      const videoMedia = isDirectFileOpen
-        ? `
-          <a class="video-thumbnail" href="${watchUrl}" target="_blank" rel="noreferrer" aria-label="Watch ${title} on YouTube">
+      if (pageMode === "videos") {
+        return `
+          <article class="video-card embed-card">
+            <div class="video-frame">
+              <iframe
+                src="https://www.youtube-nocookie.com/embed/${youtubeId}?rel=0"
+                title="${title}"
+                loading="lazy"
+                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="video-content">
+              <div class="meta-row compact-meta"><span>${category}</span><span>${tool}</span></div>
+              <h3 class="video-title">${title}</h3>
+              <div class="prompt-actions">
+                <a class="prompt-button" href="${guideUrl}">Prompt Guide</a>
+                <a class="prompt-button secondary-button" href="${watchUrl}" target="_blank" rel="noreferrer">Open YouTube</a>
+              </div>
+            </div>
+          </article>
+        `;
+      }
+
+      return `
+        <article class="video-card prompt-card">
+          <a class="video-thumbnail prompt-thumbnail" href="${guideUrl}" aria-label="Open ${title} prompt guide">
             <img
-              src="https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg"
+              src="https://i.ytimg.com/vi/${youtubeId}/oardefault.jpg"
+              onerror="this.src='https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg'"
               alt="${title}"
               loading="lazy"
             />
-            <span>Watch on YouTube</span>
+            <span class="card-badge">${category}</span>
           </a>
-        `
-        : `
-          <iframe
-            src="https://www.youtube-nocookie.com/embed/${youtubeId}?enablejsapi=1&mute=1&playsinline=1&rel=0"
-            title="${title}"
-            loading="lazy"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen>
-          </iframe>
-        `;
-
-      return `
-        <article class="video-card">
-          <div class="video-frame">
-            ${videoMedia}
-          </div>
           <div class="video-content">
+            <div class="meta-row compact-meta"><span>${tool}</span></div>
             <h3 class="video-title">${title}</h3>
+            <p class="prompt-preview">${promptCopy}</p>
             <div class="prompt-actions">
-              <a class="prompt-button" href="${guideUrl}">
-                View Guide
+              <button class="prompt-button" type="button" data-copy-prompt data-prompt="${promptCopy}">
+                Copy Prompt
+              </button>
+              <a class="prompt-button secondary-button" href="${guideUrl}">
+                View Details
               </a>
-              <a class="prompt-button secondary-button" href="${promptUrl}" target="_blank" rel="noreferrer">
+              <a class="text-link" href="${promptUrl}" target="_blank" rel="noreferrer">
                 Prompt Doc
               </a>
             </div>
@@ -174,7 +203,7 @@ const renderVideos = (videos = []) => {
     .join("");
 
   grid.innerHTML = cards;
-  setupAutoplay();
+  setupCopyButtons();
 };
 
 const loadVideos = async () => {

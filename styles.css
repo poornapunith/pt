@@ -237,6 +237,11 @@ h1 {
   backdrop-filter: blur(12px);
 }
 
+.prompt-card {
+  display: flex;
+  flex-direction: column;
+}
+
 .video-frame {
   position: relative;
   background: #111;
@@ -259,6 +264,13 @@ h1 {
   overflow: hidden;
   color: #fffaf1;
   text-decoration: none;
+}
+
+.prompt-thumbnail {
+  position: relative;
+  display: block;
+  aspect-ratio: 9 / 16;
+  background: #111;
 }
 
 .video-thumbnail img {
@@ -284,6 +296,37 @@ h1 {
   text-transform: uppercase;
 }
 
+.prompt-thumbnail img {
+  display: block;
+  filter: brightness(0.9) saturate(1.05);
+  transform: none;
+}
+
+.prompt-thumbnail::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 44%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.72), transparent);
+  pointer-events: none;
+}
+
+.card-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 1;
+  min-height: auto;
+  border-radius: 999px;
+  background: rgba(23, 35, 38, 0.88);
+  color: #fffaf1;
+  padding: 7px 10px;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .video-content {
   display: grid;
   gap: 14px;
@@ -296,15 +339,37 @@ h1 {
   line-height: 1.35;
 }
 
+.prompt-preview {
+  display: -webkit-box;
+  min-height: 4.8em;
+  margin: 0;
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
 .prompt-button {
   width: 100%;
   padding: 0 16px;
+  cursor: pointer;
+  font: inherit;
 }
 
 .prompt-actions {
   display: grid;
   grid-template-columns: 1fr;
   gap: 10px;
+}
+
+.text-link {
+  color: var(--copper-dark);
+  font-size: 0.9rem;
+  font-weight: 900;
+  text-align: center;
+  text-decoration: none;
 }
 
 .secondary-button {
@@ -394,6 +459,25 @@ h1 {
   border-radius: 8px;
   background: rgba(255, 250, 241, 0.76);
   box-shadow: 0 16px 34px rgba(57, 36, 21, 0.1);
+}
+
+.detail-thumbnail {
+  aspect-ratio: 9 / 16;
+}
+
+.copy-panel {
+  display: grid;
+  gap: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 250, 241, 0.72);
+  padding: 18px;
+}
+
+.copy-panel p {
+  margin: 0;
+  color: var(--ink);
+  font-size: 0.98rem;
 }
 
 .prompt-detail-copy h2 {
@@ -506,6 +590,27 @@ h1 {
   font-weight: 800;
 }
 
+.compact-meta {
+  margin: 0;
+}
+
+.compact-meta span {
+  padding: 6px 9px;
+  font-size: 0.72rem;
+}
+
+.video-page-heading {
+  align-items: center;
+}
+
+.video-page-heading h1 {
+  margin-bottom: 14px;
+}
+
+.embed-card .video-content {
+  background: rgba(255, 250, 241, 0.86);
+}
+
 .feature-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -605,6 +710,8 @@ code {
 
 @media (max-width: 520px) {
   .topbar {
+    align-items: flex-start;
+    flex-direction: column;
     padding-top: 16px;
   }
 
@@ -618,6 +725,22 @@ code {
 
   .nav-links {
     width: 100%;
+    flex-wrap: nowrap;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+
+  .nav-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-links a {
+    flex: 0 0 auto;
+    min-height: 38px;
+    padding: 0 12px;
+    font-size: 0.78rem;
   }
 
   .video-grid {
