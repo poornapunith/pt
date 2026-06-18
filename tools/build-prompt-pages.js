@@ -334,7 +334,7 @@ const pageTemplate = (video, index) => {
   const youtubeId = getYouTubeId(video.youtubeUrl);
   const toolLabel = getToolLabel(video.title);
   const outputLabel = getOutputLabel(video.title);
-  const promptButton = isPublicResource(video.title) ? "Open resource" : "Open prompt document";
+  const promptButton = isPublicResource(video.title) ? "Open resource" : "Open Full Prompt";
   const promptCopy = getPromptCopy(video);
   const relatedLinks = detail.related
     .map((item) => {
@@ -413,7 +413,7 @@ const pageTemplate = (video, index) => {
           <h2>Copy starter prompt</h2>
           <div class="copy-panel">
             <p>${escapeHtml(promptCopy)}</p>
-            <button class="prompt-button" type="button" data-copy-prompt data-prompt="${escapeHtml(promptCopy)}">Copy Prompt</button>
+            <button class="prompt-button" type="button" data-copy-prompt data-prompt="${escapeHtml(promptCopy)}">Copy Starter</button>
           </div>
 
           <h2>What this prompt teaches</h2>

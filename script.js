@@ -186,14 +186,11 @@ const renderVideos = (videos = []) => {
             <h3 class="video-title">${title}</h3>
             <p class="prompt-preview">${promptCopy}</p>
             <div class="prompt-actions">
-              <button class="prompt-button" type="button" data-copy-prompt data-prompt="${promptCopy}">
-                Copy Prompt
-              </button>
+              <a class="prompt-button" href="${promptUrl}" target="_blank" rel="noreferrer">
+                Open Full Prompt
+              </a>
               <a class="prompt-button secondary-button" href="${guideUrl}">
                 View Details
-              </a>
-              <a class="text-link" href="${promptUrl}" target="_blank" rel="noreferrer">
-                Prompt Doc
               </a>
             </div>
           </div>
