@@ -13,7 +13,7 @@ window.POORNA_TECH_VIDEOS = [
     },
     {
         title: "FIFA goal prompt",
-        youtubeUrl: "https://youtube.com/shorts/zYexLwojCO8?si=nlis9WZDOemsz-jF",
+        youtubeUrl: "https://youtube.com/shorts/bY74nGO9gZs?si=HZS_tmMgVw5R8kJO",
         promptUrl: "https://docs.google.com/document/d/1JZjuETF2Un_yZhDaocc3GcA38RXxE8_qdXOdSOUS4AE/edit?usp=sharing"
     
     },
