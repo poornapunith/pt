@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Admin - Poorna Tech</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="Poorna Tech home">
+        <img src="Logo.jpeg" alt="Poorna Tech logo" />
+        <span>Poorna Tech</span>
+      </a>
+      <a class="admin-link" href="./">View Site</a>
+    </header>
+
+    <main class="admin-page">
+      <section class="hero" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">Admin helper</p>
+          <h1 id="page-title">Add a Video</h1>
+          <p>
+            Fill this form, copy the generated object, and paste it inside
+            <code>window.POORNA_TECH_VIDEOS</code> in <code>data.js</code>.
+          </p>
+        </div>
+      </section>
+
+      <section class="admin-panel" aria-label="Generate data entry">
+        <label>
+          Title
+          <input id="title" type="text" placeholder="Example: Classroom Action Scene" />
+        </label>
+        <label>
+          YouTube Shorts URL
+          <input id="youtubeUrl" type="url" placeholder="https://youtube.com/shorts/..." />
+        </label>
+        <label>
+          Prompt document URL
+          <input id="promptUrl" type="url" placeholder="https://docs.google.com/document/d/..." />
+        </label>
+        <div class="admin-actions">
+          <button id="generate" class="action-button" type="button">Generate</button>
+          <button id="copy" class="action-button secondary-button" type="button">Copy Object</button>
+        </div>
+      </section>
+
+      <section class="admin-panel" aria-label="Generated object">
+        <label>
+          Generated data.js object
+          <textarea id="output" readonly></textarea>
+        </label>
+        <p>
+          Paste the generated object near the top of the array in
+          <code>data.js</code>, separated by a comma.
+        </p>
+      </section>
+    </main>
+
+    <script>
+      const title = document.querySelector("#title");
+      const youtubeUrl = document.querySelector("#youtubeUrl");
+      const promptUrl = document.querySelector("#promptUrl");
+      const output = document.querySelector("#output");
+      const generate = document.querySelector("#generate");
+      const copy = document.querySelector("#copy");
+
+      const buildObject = () => {
+        const item = {
+          title: title.value.trim(),
+          youtubeUrl: youtubeUrl.value.trim(),
+          promptUrl: promptUrl.value.trim()
+        };
+
+        output.value = `{
+    title: ${JSON.stringify(item.title)},
+    youtubeUrl: ${JSON.stringify(item.youtubeUrl)},
+    promptUrl: ${JSON.stringify(item.promptUrl)}
+}`;
+      };
+
+      generate.addEventListener("click", buildObject);
+
+      copy.addEventListener("click", async () => {
+        if (!output.value.trim()) {
+          buildObject();
+        }
+
+        try {
+          await navigator.clipboard.writeText(output.value);
+          copy.textContent = "Copied";
+        } catch {
+          copy.textContent = "Copy failed";
+        }
+
+        window.setTimeout(() => {
+          copy.textContent = "Copy Object";
+        }, 1400);
+      });
+    </script>
+  </body>
+</html>

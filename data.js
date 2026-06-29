@@ -1,5 +1,41 @@
 window.POORNA_TECH_VIDEOS = [
     {
+        title: "Water Dragon Fight",
+        youtubeUrl: "https://youtube.com/shorts/zYexLwojCO8?si=HsmsuZ_r_DB1yqK2",
+        promptUrl: "https://docs.google.com/document/d/1qmyL4vbiB8ojy6hHTu-6K4zJ5WlE1xz4fNUPXIzg73g/edit?usp=sharing"
+    
+    },
+    {
+        title: "Krishna Prompt",
+        youtubeUrl: "https://youtube.com/shorts/Hhj4knbPZ2U?si=DVs9twe09dEpU-_P",
+        promptUrl: "https://docs.google.com/document/d/1UtnsA_UTDNbqdF6Hod4A9QwBGResDuX9ZObrzhLNgzY"
+    
+    },
+    {
+        title: "FIFA goal prompt",
+        youtubeUrl: "https://youtube.com/shorts/zYexLwojCO8?si=nlis9WZDOemsz-jF",
+        promptUrl: "https://docs.google.com/document/d/1JZjuETF2Un_yZhDaocc3GcA38RXxE8_qdXOdSOUS4AE/edit?usp=sharing"
+    
+    },
+    {
+        title: "Desert Fight sequence",
+        youtubeUrl: "https://youtube.com/shorts/Bif1B3fN0bY?si=8ImTNzFkv3aB-gxr",
+        promptUrl: "https://docs.google.com/document/d/1ek8cK8G57INerzhk8BYjz6uAGtxdefsFZqYYTzdfHVQ/edit?usp=sharing"
+    
+    },
+    {
+        title: "Mahabharat website link",
+        youtubeUrl: "https://youtube.com/shorts/u7UesAnJ6Ck?si=Axy2LiZfezGFWAOF",
+        promptUrl: "https://themahabharat.lovable.app/"
+    
+    },
+    {
+        title: "Hill View Prompt",
+        youtubeUrl: "https://youtube.com/shorts/-g0vFMP4EA0?si=GyYpGxWtnS53yRqR",
+        promptUrl: "https://docs.google.com/document/d/18uKOvjJjjduyWAb9ZU3Sl__RtfLlXkvuJin0-RcOjVI/edit?usp=sharing"
+    
+    },
+    {
         title: "Ghost Love Image Prompt",
         youtubeUrl: "https://youtube.com/shorts/aa3N2IpWkig?si=16MEWQB32c6PdDMr",
         promptUrl: "https://docs.google.com/document/d/16Brgb1hxeOQbTzZEYGCFHifuirsddcoUU3xlpmiXW94/edit?usp=sharing"

@@ -1,30 +1,19 @@
 # Poorna Tech
 
-Poorna Tech shares short-form tech videos with ready-to-use prompt documents.
-
-Visit the website to watch the latest videos and open the matching prompt for each one.
+Simple static website for Poorna Tech videos and prompt document links.
 
 ## Website
 
-This project powers the public Poorna Tech prompt library.
+The homepage shows a grid of video thumbnails. Each card has:
 
-The site includes public About, Contact, Guide, FAQ, Resources, Privacy Policy,
-Terms, blog, glossary, editorial, individual prompt guide pages, and a separate
-videos page for embedded Shorts.
+- `Play Video` - plays the YouTube video in that card
+- `Copy Prompt` - opens the matching prompt document or resource link
 
-## Updating Prompts
+## Updating Videos
 
-Add new video entries in `data.js`.
+Edit `data.js` and add a new object inside `window.POORNA_TECH_VIDEOS`.
 
-For AdSense and search visibility, every video should also have an on-site prompt
-guide page. After editing `data.js`, run:
-
-```bash
-node tools/build-prompt-pages.js
-```
-
-That updates the prompt pages and `sitemap.xml`. The home page uses thumbnail
-prompt cards; `videos.html` is where the embedded YouTube videos appear.
+Use `admin.html` locally as a helper to generate the object format.
 
 ## Follow
 
